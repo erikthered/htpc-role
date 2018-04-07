@@ -1,0 +1,3 @@
+---
+- hosts: htpc
+  remote_user: root
