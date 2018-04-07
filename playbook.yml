@@ -1,3 +1,23 @@
 ---
-- hosts: htpc
-  remote_user: root
+- hosts: all
+  tasks:
+    - name: add additional repos
+      become: true
+      apt_repository: repo={{item}} state=present
+      with_items:
+        - ppa:team-xbmc/ppa
+    - name: update packages via apt
+      become: true
+      apt:
+        upgrade: dist
+        update_cache: yes
+        cache_valid_time: 86400 # one day
+    - name: Install desktop packages
+      become: true
+      apt: name={{item}} state=present
+      with_items:
+        - lightdm
+        - lubuntu-core
+        - lxterminal
+        - kodi
+        - virtualbox-guest-dkms
