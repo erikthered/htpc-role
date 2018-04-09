@@ -17,7 +17,12 @@
       apt: name={{item}} state=present
       with_items:
         - lightdm
+        - lightdm-gtk-greeter
         - lubuntu-core
         - lxterminal
         - kodi
         - virtualbox-guest-dkms
+    - name: Install steam
+      become: true
+      apt:
+        deb: https://steamcdn-a.akamaihd.net/client/installer/steam.deb
